@@ -1,23 +1,42 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import fetchGraphQL from "./fetchGraqhQL";
+
+const { useState, useEffect } = React;
 
 function App() {
+  const [name, setName] = useState<string>("");
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchGraphQL(`
+      query RepositoryNameQuery {
+        repository(owner: "cmmmli", name: ".dotfiles") {
+          name
+        }
+      }
+    `)
+      .then((response) => {
+        if (!isMounted) {
+          return;
+        }
+        const data = response.data;
+        setName(data.repository.name);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [name]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>{name != null ? `Repository: ${name}` : "Loading"}</p>
       </header>
     </div>
   );
