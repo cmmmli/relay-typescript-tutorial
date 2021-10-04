@@ -12,7 +12,9 @@
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-relay": "^12.0.0",
     "react-scripts": "4.0.3",
+    "relay-runtime": "^12.0.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -44,11 +46,14 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
+    "babel-plugin-relay": "^12.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.4.1"
+    "graphql": "^15.6.0",
+    "prettier": "2.4.1",
+    "relay-compiler": "^12.0.0"
   }
 }
