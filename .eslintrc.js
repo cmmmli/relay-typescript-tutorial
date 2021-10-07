@@ -29,13 +29,15 @@ module.exports = {
     "import/no-cycle": "error",
     "import/no-default-export": "off",
 
+    "react/prop-types": "off",
+
     "@typescript-eslint/array-type": ["warn", { default: "generic" }],
     "@typescript-eslint/naming-convention": [
       "warn",
       { "selector": "default", "format": ["camelCase", "UPPER_CASE", "PascalCase"], "leadingUnderscore": "allow" },
       { "selector": "typeLike", "format": ["PascalCase"], "leadingUnderscore": "allow" },
     ],
-    "@typescript-eslint/explicit-module-boundary-types": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
 
     // "@typescript-eslint/no-explicit-any": "off",
     // "@typescript-eslint/no-empty-interface": "off",

@@ -6,6 +6,7 @@ const fetchRelay: FetchFunction = async (params, variables) => {
   console.log(
     `fetching query ${params.name} with ${JSON.stringify(variables)}`
   );
+  if (!params.text) return;
   return fetchGraphQL(params.text, variables);
 };
 
