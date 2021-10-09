@@ -8,22 +8,23 @@ import {
   PreloadedQuery,
 } from "react-relay/hooks";
 import RelayEnvironment from "./RelayEnvironment";
-import { AppRepositoryNameQuery } from "./__generated__/AppRepositoryNameQuery.graphql";
+import { AppViewerRepositoriesNameQuery } from "./__generated__/AppViewerRepositoriesNameQuery.graphql";
+import { RepositoryNamesComponent } from "./RepositoryNames";
 
 const { Suspense } = React;
 
-const RepositoryNameQuery = graphql`
-  query AppRepositoryNameQuery($owner: String!, $name: String!) {
-    repository(owner: $owner, name: $name) {
-      name
-      nameWithOwner
+const ViewerRepositoriesNameQuery = graphql`
+  query AppViewerRepositoriesNameQuery {
+    viewer {
+      login
+      ...RepositoryNamesComponent_owner
     }
   }
 `;
 
-const preloadedQuery = loadQuery<AppRepositoryNameQuery>(
+const preloadedQuery = loadQuery<AppViewerRepositoriesNameQuery>(
   RelayEnvironment,
-  RepositoryNameQuery,
+  ViewerRepositoriesNameQuery,
   {
     owner: "cmmmli",
     name: ".dotfiles",
@@ -31,19 +32,20 @@ const preloadedQuery = loadQuery<AppRepositoryNameQuery>(
 );
 
 type Props = {
-  queryRef: PreloadedQuery<AppRepositoryNameQuery>;
+  queryRef: PreloadedQuery<AppViewerRepositoriesNameQuery>;
 };
 
-function App(props: Props): JSX.Element {
-  const data = usePreloadedQuery<AppRepositoryNameQuery>(
-    RepositoryNameQuery,
+function App(props: Props) {
+  const data = usePreloadedQuery<AppViewerRepositoriesNameQuery>(
+    ViewerRepositoriesNameQuery,
     props.queryRef
   );
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>{data.repository?.name}</p>
+        {data.viewer.login}
+        <RepositoryNamesComponent owner={data.viewer} />
       </header>
     </div>
   );

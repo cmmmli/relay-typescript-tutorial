@@ -1,3 +1,4 @@
 .eslintrc.js
 public/
 build/
+src/__generated__/

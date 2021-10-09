@@ -1,4 +1,6 @@
-async function fetchGraphQL(text: string, variables?) {
+import type { Variables } from "relay-runtime";
+
+async function fetchGraphQL(text: string, variables: Variables) {
   const REACT_APP_GITHUB_AUTH_TOKEN =
     process.env["REACT_APP_GITHUB_AUTH_TOKEN"];
 
