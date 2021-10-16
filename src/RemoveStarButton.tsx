@@ -5,6 +5,8 @@ import type {
   RemoveStarButtonMutation,
   RemoveStarButtonMutationVariables,
 } from "./__generated__/RemoveStarButtonMutation.graphql";
+import { Button } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 
 export const RemoveStarButton = ({
   input: { starrableId },
@@ -19,12 +21,9 @@ export const RemoveStarButton = ({
     }
   `);
 
-  if (isInFlight) {
-    return <button disabled>☆</button>;
-  }
-
   return (
-    <button
+    <Button
+      disabled={isInFlight}
       onClick={() => {
         commit({
           variables: {
@@ -35,7 +34,7 @@ export const RemoveStarButton = ({
         });
       }}
     >
-      ★
-    </button>
+      <StarIcon />
+    </Button>
   );
 };

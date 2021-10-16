@@ -4,6 +4,7 @@ import { useFragment } from "react-relay";
 import type { RepositoryNamesComponent_owner$key } from "./__generated__/RepositoryNamesComponent_owner.graphql";
 import { AddStarButton } from "./AddStarButton";
 import { RemoveStarButton } from "./RemoveStarButton";
+import { List, ListItem } from "@mui/material";
 
 type Props = {
   owner: RepositoryNamesComponent_owner$key;
@@ -31,15 +32,15 @@ export const RepositoryNamesComponent = ({ owner }: Props) => {
   const repositories = data.repositories.edges
     ?.filter((edge): edge is NonNullable<typeof edge> => edge != null)
     .map((edge) => (
-      <li key={edge.node?.id}>
+      <ListItem key={edge.node?.id}>
         {edge.node?.name}{" "}
         {edge.node?.viewerHasStarred ? (
           <RemoveStarButton input={{ starrableId: edge.node?.id || "" }} />
         ) : (
           <AddStarButton input={{ starrableId: edge.node?.id || "" }} />
         )}
-      </li>
+      </ListItem>
     ));
 
-  return <ul className="repositories">{repositories}</ul>;
+  return <List className="repositories">{repositories}</List>;
 };
