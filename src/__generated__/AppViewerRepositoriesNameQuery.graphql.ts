@@ -51,14 +51,21 @@ fragment RepositoryListItem_repository on Repository {
 }
 
 fragment RepositoryList_owner on User {
-  repositories(first: 10) {
+  repositories(first: 5, orderBy: {field: UPDATED_AT, direction: DESC}) {
     edges {
       node {
         id
         ...RepositoryListItem_repository
+        __typename
       }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
+  id
 }
 */
 
@@ -74,7 +81,15 @@ v1 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 10
+    "value": 5
+  },
+  {
+    "kind": "Literal",
+    "name": "orderBy",
+    "value": {
+      "direction": "DESC",
+      "field": "UPDATED_AT"
+    }
   }
 ],
 v2 = {
@@ -168,7 +183,13 @@ return {
                       },
                       {
                         "alias": null,
-                        "args": (v1/*: any*/),
+                        "args": [
+                          {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 10
+                          }
+                        ],
                         "concreteType": "IssueConnection",
                         "kind": "LinkedField",
                         "name": "issues",
@@ -220,15 +241,65 @@ return {
                           }
                         ],
                         "storageKey": "issues(first:10)"
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null
                       }
                     ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "cursor",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "kind": "LinkedField",
+                "name": "pageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "endCursor",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "hasNextPage",
                     "storageKey": null
                   }
                 ],
                 "storageKey": null
               }
             ],
-            "storageKey": "repositories(first:10)"
+            "storageKey": "repositories(first:5,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
+          },
+          {
+            "alias": null,
+            "args": (v1/*: any*/),
+            "filters": [
+              "orderBy"
+            ],
+            "handle": "connection",
+            "key": "ReposiroyList_owner_repositories",
+            "kind": "LinkedHandle",
+            "name": "repositories"
           },
           (v2/*: any*/)
         ],
@@ -237,12 +308,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "415066db791536a0aea3b5df00271964",
+    "cacheID": "792e60adbd4dba26b98088096d04af2d",
     "id": null,
     "metadata": {},
     "name": "AppViewerRepositoriesNameQuery",
     "operationKind": "query",
-    "text": "query AppViewerRepositoriesNameQuery {\n  viewer {\n    login\n    ...RepositoryList_owner\n    id\n  }\n}\n\nfragment IssueList_repository on Repository {\n  issues(first: 10) {\n    edges {\n      node {\n        id\n        title\n        bodyText\n      }\n    }\n  }\n}\n\nfragment RepositoryListItem_repository on Repository {\n  id\n  name\n  viewerHasStarred\n  issues(first: 10) {\n    totalCount\n  }\n  ...IssueList_repository\n}\n\nfragment RepositoryList_owner on User {\n  repositories(first: 10) {\n    edges {\n      node {\n        id\n        ...RepositoryListItem_repository\n      }\n    }\n  }\n}\n"
+    "text": "query AppViewerRepositoriesNameQuery {\n  viewer {\n    login\n    ...RepositoryList_owner\n    id\n  }\n}\n\nfragment IssueList_repository on Repository {\n  issues(first: 10) {\n    edges {\n      node {\n        id\n        title\n        bodyText\n      }\n    }\n  }\n}\n\nfragment RepositoryListItem_repository on Repository {\n  id\n  name\n  viewerHasStarred\n  issues(first: 10) {\n    totalCount\n  }\n  ...IssueList_repository\n}\n\nfragment RepositoryList_owner on User {\n  repositories(first: 5, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        ...RepositoryListItem_repository\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();

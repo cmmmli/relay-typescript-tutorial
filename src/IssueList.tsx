@@ -37,8 +37,8 @@ export const IssueList = (props: Props) => {
 
   const listItems = issues.map((issue) => {
     return (
-      <ListItem key={issue.id}>
-        <ListItemButton sx={{ pl: 4 }}>
+      <ListItem key={issue.id} disablePadding sx={{ pl: 4 }}>
+        <ListItemButton>
           <ListItemText primary={issue.title} />
         </ListItemButton>
       </ListItem>

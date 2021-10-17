@@ -24,7 +24,8 @@ export const RemoveStarButton = ({
   return (
     <Button
       disabled={isInFlight}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         commit({
           variables: {
             input: {
