@@ -5,22 +5,22 @@
 import { ReaderFragment } from "relay-runtime";
 
 import { FragmentRefs } from "relay-runtime";
-export type RepositoryNamesComponent_owner = {
-    readonly repositories: {
+export type IssueList_repository = {
+    readonly issues: {
         readonly edges: ReadonlyArray<{
             readonly node: {
                 readonly id: string;
-                readonly name: string;
-                readonly viewerHasStarred: boolean;
+                readonly title: string;
+                readonly bodyText: string;
             } | null;
         } | null> | null;
     };
-    readonly " $refType": "RepositoryNamesComponent_owner";
+    readonly " $refType": "IssueList_repository";
 };
-export type RepositoryNamesComponent_owner$data = RepositoryNamesComponent_owner;
-export type RepositoryNamesComponent_owner$key = {
-    readonly " $data"?: RepositoryNamesComponent_owner$data;
-    readonly " $fragmentRefs": FragmentRefs<"RepositoryNamesComponent_owner">;
+export type IssueList_repository$data = IssueList_repository;
+export type IssueList_repository$key = {
+    readonly " $data"?: IssueList_repository$data;
+    readonly " $fragmentRefs": FragmentRefs<"IssueList_repository">;
 };
 
 
@@ -35,7 +35,7 @@ const node: ReaderFragment = {
   ],
   "kind": "Fragment",
   "metadata": null,
-  "name": "RepositoryNamesComponent_owner",
+  "name": "IssueList_repository",
   "selections": [
     {
       "alias": null,
@@ -46,15 +46,15 @@ const node: ReaderFragment = {
           "variableName": "first"
         }
       ],
-      "concreteType": "RepositoryConnection",
+      "concreteType": "IssueConnection",
       "kind": "LinkedField",
-      "name": "repositories",
+      "name": "issues",
       "plural": false,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "concreteType": "RepositoryEdge",
+          "concreteType": "IssueEdge",
           "kind": "LinkedField",
           "name": "edges",
           "plural": true,
@@ -62,7 +62,7 @@ const node: ReaderFragment = {
             {
               "alias": null,
               "args": null,
-              "concreteType": "Repository",
+              "concreteType": "Issue",
               "kind": "LinkedField",
               "name": "node",
               "plural": false,
@@ -78,14 +78,14 @@ const node: ReaderFragment = {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "name",
+                  "name": "title",
                   "storageKey": null
                 },
                 {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "viewerHasStarred",
+                  "name": "bodyText",
                   "storageKey": null
                 }
               ],
@@ -98,8 +98,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "User",
+  "type": "Repository",
   "abstractKey": null
 };
-(node as any).hash = '1ee9b6b98d62a788258798778d28e7d4';
+(node as any).hash = '6178f2d1c317c61b3b7f134dac3010d0';
 export default node;
