@@ -9,7 +9,7 @@ import {
 } from "react-relay/hooks";
 import RelayEnvironment from "./RelayEnvironment";
 import { AppViewerRepositoriesNameQuery } from "./__generated__/AppViewerRepositoriesNameQuery.graphql";
-import { RepositoryNamesComponent } from "./RepositoryNames";
+import { RepositoryList } from "./RepositoryList";
 
 const { Suspense } = React;
 
@@ -17,7 +17,7 @@ const ViewerRepositoriesNameQuery = graphql`
   query AppViewerRepositoriesNameQuery {
     viewer {
       login
-      ...RepositoryNamesComponent_owner
+      ...RepositoryList_owner
     }
   }
 `;
@@ -45,7 +45,7 @@ function App(props: Props) {
     <div className="App">
       <header className="App-header">
         {data.viewer.login}
-        <RepositoryNamesComponent owner={data.viewer} />
+        <RepositoryList owner={data.viewer} />
       </header>
     </div>
   );
