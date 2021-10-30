@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import type {
@@ -8,31 +7,29 @@ import type {
 import { Button } from "@mui/material";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
-export const AddStarButton = ({
-  input: { starrableId },
-}: AddStarButtonMutationVariables) => {
-  const [commit, isInFlight] = useMutation<AddStarButtonMutation>(graphql`
-    mutation AddStarButtonMutation($input: AddStarInput!) {
-      addStar(input: $input) {
-        starrable {
-          viewerHasStarred
-        }
+import { FC } from "react";
+
+type Props = AddStarButtonMutationVariables;
+
+const mutation = graphql`
+  mutation AddStarButtonMutation($input: AddStarInput!) {
+    addStar(input: $input) {
+      starrable {
+        viewerHasStarred
       }
     }
-  `);
+  }
+`;
+
+export const AddStarButton: FC<Props> = ({ input }) => {
+  const [commit, isInFlight] = useMutation<AddStarButtonMutation>(mutation);
 
   return (
     <Button
       disabled={isInFlight}
       onClick={(e) => {
         e.stopPropagation();
-        commit({
-          variables: {
-            input: {
-              starrableId,
-            },
-          },
-        });
+        commit({ variables: { input } });
       }}
     >
       <StarOutlineIcon />

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import graphql from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
 import { IssueList_repository$key } from "~/src/__generated__/IssueList_repository.graphql";
@@ -8,32 +8,27 @@ type Props = {
   repository: IssueList_repository$key;
 };
 
-export const IssueList = (props: Props) => {
-  const data = useFragment(
-    graphql`
-      fragment IssueList_repository on Repository
-      @argumentDefinitions(first: { type: "Int", defaultValue: 10 }) {
-        issues(first: $first) {
-          edges {
-            node {
-              id
-              title
-              bodyText
-            }
-          }
+const fragment = graphql`
+  fragment IssueList_repository on Repository
+  @argumentDefinitions(first: { type: "Int", defaultValue: 10 }) {
+    issues(first: $first) {
+      edges {
+        node {
+          id
+          title
+          bodyText
         }
       }
-    `,
-    props.repository
-  );
+    }
+  }
+`;
 
-  const issues = data.issues.edges
+export const IssueList: FC<Props> = ({ repository }) => {
+  const data = useFragment(fragment, repository);
+
+  const issues = (data.issues.edges || [])
     ?.map((edge) => edge?.node)
     .filter((node): node is NonNullable<typeof node> => node != null);
-
-  if (!issues) {
-    return <></>;
-  }
 
   const listItems = issues.map((issue) => {
     return (
