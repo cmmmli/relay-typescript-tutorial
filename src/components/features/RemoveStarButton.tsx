@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import graphql from "babel-plugin-relay/macro";
 import { useMutation } from "react-relay";
 import type {
@@ -8,31 +8,27 @@ import type {
 import { Button } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
-export const RemoveStarButton = ({
-  input: { starrableId },
-}: RemoveStarButtonMutationVariables) => {
-  const [commit, isInFlight] = useMutation<RemoveStarButtonMutation>(graphql`
-    mutation RemoveStarButtonMutation($input: RemoveStarInput!) {
-      removeStar(input: $input) {
-        starrable {
-          viewerHasStarred
-        }
+type Props = RemoveStarButtonMutationVariables;
+
+const mutation = graphql`
+  mutation RemoveStarButtonMutation($input: RemoveStarInput!) {
+    removeStar(input: $input) {
+      starrable {
+        viewerHasStarred
       }
     }
-  `);
+  }
+`;
+
+export const RemoveStarButton: FC<Props> = ({ input }) => {
+  const [commit, isInFlight] = useMutation<RemoveStarButtonMutation>(mutation);
 
   return (
     <Button
       disabled={isInFlight}
       onClick={(e) => {
         e.stopPropagation();
-        commit({
-          variables: {
-            input: {
-              starrableId,
-            },
-          },
-        });
+        commit({ variables: { input } });
       }}
     >
       <StarIcon />

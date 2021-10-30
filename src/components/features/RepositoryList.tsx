@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { FC } from "react";
 import graphql from "babel-plugin-relay/macro";
 import { usePaginationFragment } from "react-relay";
 import type { RepositoryList_owner$key } from "~/src/__generated__/RepositoryList_owner.graphql";
@@ -11,39 +11,37 @@ import {
 } from "@mui/material";
 import { RepositoryListItem } from "./RepositoryListItem";
 import { Box } from "@mui/system";
-import { RepositoryListPaginationQuery } from "~/src/__generated__/RepositoryListPaginationQuery.graphql";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Props = {
   owner: RepositoryList_owner$key;
 };
 
-export const RepositoryList = ({ owner }: Props) => {
-  const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment<
-    RepositoryListPaginationQuery,
-    RepositoryList_owner$key
-  >(
-    graphql`
-      fragment RepositoryList_owner on User
-      @refetchable(queryName: "RepositoryListPaginationQuery")
-      @argumentDefinitions(
-        first: { type: "Int", defaultValue: 5 }
-        cursor: { type: "String" }
-      ) {
-        repositories(
-          first: $first
-          after: $cursor
-          orderBy: { field: UPDATED_AT, direction: DESC }
-        ) @connection(key: "ReposiroyList_owner_repositories") {
-          edges {
-            node {
-              id
-              ...RepositoryListItem_repository
-            }
-          }
+const fragment = graphql`
+  fragment RepositoryList_owner on User
+  @refetchable(queryName: "RepositoryListPaginationQuery")
+  @argumentDefinitions(
+    first: { type: "Int", defaultValue: 5 }
+    cursor: { type: "String" }
+  ) {
+    repositories(
+      first: $first
+      after: $cursor
+      orderBy: { field: UPDATED_AT, direction: DESC }
+    ) @connection(key: "ReposiroyList_owner_repositories") {
+      edges {
+        node {
+          id
+          ...RepositoryListItem_repository
         }
       }
-    `,
+    }
+  }
+`;
+
+export const RepositoryList: FC<Props> = ({ owner }) => {
+  const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
+    fragment,
     owner
   );
 
