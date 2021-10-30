@@ -1,4 +1,5 @@
 .eslintrc.js
+relay.config.js
 public/
 build/
 src/__generated__/
