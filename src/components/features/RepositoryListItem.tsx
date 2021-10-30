@@ -5,8 +5,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { AddStarButton } from "./AddStarButton";
-import { RemoveStarButton } from "./RemoveStarButton";
+import { StarButton } from "./StarButton";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useFragment } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
@@ -41,11 +40,10 @@ export const RepositoryListItem: FC<Props> = (props) => {
     <>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          {repository.viewerHasStarred ? (
-            <RemoveStarButton input={{ starrableId: repository.id }} />
-          ) : (
-            <AddStarButton input={{ starrableId: repository.id }} />
-          )}
+          <StarButton
+            starred={repository.viewerHasStarred}
+            repositoryId={repository.id}
+          />
         </ListItemIcon>
         <ListItemText primary={repository.name}></ListItemText>
         {hasIssue && (open ? <ExpandLess /> : <ExpandMore />)}
