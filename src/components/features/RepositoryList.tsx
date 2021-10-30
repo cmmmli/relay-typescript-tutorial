@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import graphql from "babel-plugin-relay/macro";
 import { usePaginationFragment } from "react-relay";
-import type { RepositoryList_owner$key } from "./__generated__/RepositoryList_owner.graphql";
+import type { RepositoryList_owner$key } from "~/src/__generated__/RepositoryList_owner.graphql";
 import {
   List,
   ListItemButton,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { RepositoryListItem } from "./RepositoryListItem";
 import { Box } from "@mui/system";
-import { RepositoryListPaginationQuery } from "./__generated__/RepositoryListPaginationQuery.graphql";
+import { RepositoryListPaginationQuery } from "~/src/__generated__/RepositoryListPaginationQuery.graphql";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Props = {
@@ -47,13 +47,10 @@ export const RepositoryList = ({ owner }: Props) => {
     owner
   );
 
-  const repositories = data.repositories.edges
+  const repositories = (data.repositories.edges || [])
     ?.map((edge) => edge?.node)
     .filter((node): node is NonNullable<typeof node> => node != null);
 
-  if (repositories == null) {
-    return <></>;
-  }
   const repositoryItems = repositories.map((repo) => {
     return <RepositoryListItem repository={repo} key={repo.id} />;
   });

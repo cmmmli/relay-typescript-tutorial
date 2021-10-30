@@ -1,7 +1,7 @@
 import React from "react";
 import graphql from "babel-plugin-relay/macro";
 import { useFragment } from "react-relay";
-import { IssueList_repository$key } from "./__generated__/IssueList_repository.graphql";
+import { IssueList_repository$key } from "~/src/__generated__/IssueList_repository.graphql";
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 
 type Props = {

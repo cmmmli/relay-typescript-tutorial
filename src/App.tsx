@@ -7,9 +7,9 @@ import {
   usePreloadedQuery,
   PreloadedQuery,
 } from "react-relay/hooks";
-import RelayEnvironment from "./RelayEnvironment";
+import RelayEnvironment from "./lib/react-relay/RelayEnvironment";
 import { AppViewerRepositoriesNameQuery } from "./__generated__/AppViewerRepositoriesNameQuery.graphql";
-import { RepositoryList } from "./RepositoryList";
+import { RepositoryList } from "./components/features/RepositoryList";
 
 const { Suspense } = React;
 
@@ -25,10 +25,7 @@ const ViewerRepositoriesNameQuery = graphql`
 const preloadedQuery = loadQuery<AppViewerRepositoriesNameQuery>(
   RelayEnvironment,
   ViewerRepositoriesNameQuery,
-  {
-    owner: "cmmmli",
-    name: ".dotfiles",
-  }
+  {}
 );
 
 type Props = {

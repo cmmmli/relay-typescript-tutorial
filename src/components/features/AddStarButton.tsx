@@ -1,19 +1,19 @@
 import React from "react";
-import graphql from "babel-plugin-relay/macro";
 import { useMutation } from "react-relay";
+import graphql from "babel-plugin-relay/macro";
 import type {
-  RemoveStarButtonMutation,
-  RemoveStarButtonMutationVariables,
-} from "./__generated__/RemoveStarButtonMutation.graphql";
+  AddStarButtonMutation,
+  AddStarButtonMutationVariables,
+} from "~/src/__generated__/AddStarButtonMutation.graphql";
 import { Button } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
-export const RemoveStarButton = ({
+export const AddStarButton = ({
   input: { starrableId },
-}: RemoveStarButtonMutationVariables) => {
-  const [commit, isInFlight] = useMutation<RemoveStarButtonMutation>(graphql`
-    mutation RemoveStarButtonMutation($input: RemoveStarInput!) {
-      removeStar(input: $input) {
+}: AddStarButtonMutationVariables) => {
+  const [commit, isInFlight] = useMutation<AddStarButtonMutation>(graphql`
+    mutation AddStarButtonMutation($input: AddStarInput!) {
+      addStar(input: $input) {
         starrable {
           viewerHasStarred
         }
@@ -35,7 +35,7 @@ export const RemoveStarButton = ({
         });
       }}
     >
-      <StarIcon />
+      <StarOutlineIcon />
     </Button>
   );
 };

@@ -10,7 +10,7 @@ import { RemoveStarButton } from "./RemoveStarButton";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useFragment } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import { RepositoryListItem_repository$key } from "./__generated__/RepositoryListItem_repository.graphql";
+import { RepositoryListItem_repository$key } from "../../__generated__/RepositoryListItem_repository.graphql";
 import { IssueList } from "./IssueList";
 
 type Props = {
