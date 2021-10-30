@@ -1,9 +1,6 @@
-import { FC, MouseEventHandler, useCallback } from "react";
-import { Button } from "@mui/material";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import { FC } from "react";
 import { RemoveStarButton } from "./RemoveStarButton";
 import { AddStarButton } from "./AddStarButton";
-import { RepositoryList } from "./RepositoryList";
 
 type Props = {
   starred: boolean;
