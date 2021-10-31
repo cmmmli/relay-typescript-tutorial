@@ -1,7 +1,4 @@
-import { FC } from "react";
-import graphql from "babel-plugin-relay/macro";
-import { usePaginationFragment } from "react-relay";
-import type { RepositoryList_owner$key } from "~/src/__generated__/RepositoryList_owner.graphql";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   List,
   ListItemButton,
@@ -9,9 +6,13 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { RepositoryListItem } from "./RepositoryListItem";
 import { Box } from "@mui/system";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { FC, Fragment } from "react";
+import { graphql, usePaginationFragment } from "react-relay";
+
+import type { RepositoryList_owner$key } from "~/src/__generated__/RepositoryList_owner.graphql";
+
+import { RepositoryListItem } from "./RepositoryListItem";
 
 type Props = {
   owner: RepositoryList_owner$key;

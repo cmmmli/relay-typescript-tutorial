@@ -1,12 +1,12 @@
+import StarIcon from "@mui/icons-material/Star";
+import { Button } from "@mui/material";
 import { FC } from "react";
-import graphql from "babel-plugin-relay/macro";
-import { useMutation } from "react-relay";
+import { graphql, useMutation } from "react-relay";
+
 import type {
   RemoveStarButtonMutation,
   RemoveStarButtonMutationVariables,
 } from "~/src/__generated__/RemoveStarButtonMutation.graphql";
-import { Button } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 
 type Props = RemoveStarButtonMutationVariables;
 

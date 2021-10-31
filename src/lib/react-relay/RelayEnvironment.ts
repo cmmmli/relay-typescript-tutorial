@@ -1,5 +1,6 @@
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 import type { FetchFunction } from "relay-runtime";
+
 import fetchGraphQL from "./fetchGraqhQL";
 
 const fetchRelay: FetchFunction = async (params, variables) => {

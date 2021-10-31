@@ -39,6 +39,26 @@ module.exports = {
     ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
 
+    "sort-imports": ["error", { ignoreDeclarationSort: true }],
+    "import/first": "off",
+    "import/order": [
+      "error",
+      {
+        pathGroups: [
+          {
+            pattern: "~/**",
+            group: "external",
+            position: "after",
+          },
+        ],
+        "newlines-between": "always",
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
+
     "react/react-in-jsx-scope": "off"
 
     // "@typescript-eslint/no-explicit-any": "off",

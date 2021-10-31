@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { RemoveStarButton } from "./RemoveStarButton";
+
 import { AddStarButton } from "./AddStarButton";
+import { RemoveStarButton } from "./RemoveStarButton";
 
 type Props = {
   starred: boolean;

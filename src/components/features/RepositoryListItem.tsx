@@ -1,16 +1,17 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
   Collapse,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { StarButton } from "./StarButton";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { useFragment } from "react-relay";
-import graphql from "babel-plugin-relay/macro";
+import { FC, useCallback, useMemo, useState } from "react";
+import { graphql, useFragment } from "react-relay";
+
 import { RepositoryListItem_repository$key } from "../../__generated__/RepositoryListItem_repository.graphql";
+
 import { IssueList } from "./IssueList";
+import { StarButton } from "./StarButton";
 
 type Props = {
   repository: RepositoryListItem_repository$key;

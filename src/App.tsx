@@ -1,15 +1,16 @@
 import React from "react";
 import "./App.css";
-import graphql from "babel-plugin-relay/macro";
+import { graphql } from "react-relay";
 import {
+  PreloadedQuery,
   RelayEnvironmentProvider,
   loadQuery,
   usePreloadedQuery,
-  PreloadedQuery,
 } from "react-relay/hooks";
-import RelayEnvironment from "./lib/react-relay/RelayEnvironment";
+
 import { AppViewerRepositoriesNameQuery } from "./__generated__/AppViewerRepositoriesNameQuery.graphql";
 import { RepositoryList } from "./components/features/RepositoryList";
+import RelayEnvironment from "./lib/react-relay/RelayEnvironment";
 
 const { Suspense } = React;
 

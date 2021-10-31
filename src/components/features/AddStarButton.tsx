@@ -1,13 +1,12 @@
-import { useMutation } from "react-relay";
-import graphql from "babel-plugin-relay/macro";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import { Button } from "@mui/material";
+import { FC } from "react";
+import { graphql, useMutation } from "react-relay";
+
 import type {
   AddStarButtonMutation,
   AddStarButtonMutationVariables,
 } from "~/src/__generated__/AddStarButtonMutation.graphql";
-import { Button } from "@mui/material";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-
-import { FC } from "react";
 
 type Props = AddStarButtonMutationVariables;
 
